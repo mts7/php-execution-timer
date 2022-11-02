@@ -1,6 +1,6 @@
 {
-  "name": "mts7/php-base-template",
-  "description": "PHP Base Template",
+  "name": "mts7/php-execution-timer",
+  "description": "Testable PHP timer",
   "minimum-stability": "stable",
   "license": "MIT",
   "require": {
@@ -20,12 +20,12 @@
   },
   "autoload": {
     "psr-4": {
-      "MtsProject\\": "src/"
+      "MtsTimer\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "MtsProject\\Tests\\": "tests/"
+      "MtsTimer\\Tests\\": "tests/"
     }
   },
   "config": {
