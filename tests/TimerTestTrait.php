@@ -52,7 +52,7 @@ trait TimerTestTrait
         $this->assertGreaterThan(0.0, $duration);
         $this->expectException(IncompleteTimingException::class);
         $this->expectErrorMessage(
-            'Call $timer->sumDuration() after stopping the timer before getting the total duration.'
+            'Call $timer->addDuration() after stopping the timer before getting the total duration.'
         );
 
         $this->fixture->getTotalDuration();
@@ -137,7 +137,7 @@ trait TimerTestTrait
     {
         $this->expectException(IncompleteTimingException::class);
         $this->expectErrorMessage(
-            'Call $timer->sumDuration() after stopping the timer before getting the total duration.'
+            'Call $timer->addDuration() after stopping the timer before getting the total duration.'
         );
 
         $this->fixture->getTotalDuration();
