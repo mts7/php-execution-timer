@@ -31,7 +31,12 @@ abstract class AbstractTimer implements TimerInterface
     {
         // save the time prior to executing additional statements
         $now = $this->getNow();
-        if ($this->timeStop > $this->timeStart || $this->timeStart === 0.0) {
+        if ($this->timeStop > $this->timeStart) {
+            throw new IncompleteTimingException(
+                'Call $timer->reset() or $timer->start() before calling $timer->stop() again.'
+            );
+        }
+        if ($this->timeStart === 0.0) {
             throw new IncompleteTimingException('Call $timer->start() prior to calling $timer->stop().');
         }
         $this->timeStop = $now;

@@ -112,7 +112,7 @@ trait TimerTestTrait
         $this->initializeTimer();
 
         $this->expectException(IncompleteTimingException::class);
-        $this->expectErrorMessage('Call $timer->start() prior to calling $timer->stop().');
+        $this->expectErrorMessage('Call $timer->reset() or $timer->start() before calling $timer->stop() again.');
 
         $this->fixture->stop();
     }
