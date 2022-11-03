@@ -64,7 +64,7 @@ abstract class AbstractTimer implements TimerInterface
     {
         if ($this->duration === 0.0) {
             throw new IncompleteTimingException(
-                'Call $timer->sumDuration() after stopping the timer before getting the total duration.'
+                'Call $timer->addDuration() after stopping the timer before getting the total duration.'
             );
         }
 
