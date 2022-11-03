@@ -141,6 +141,7 @@
             <arg value="--min-msi=100" />
             <arg value="--min-covered-msi=100" />
             <arg value="--coverage=reports" />
+            <arg value="--skip-initial-tests" />
         </exec>
     </target>
 </project>

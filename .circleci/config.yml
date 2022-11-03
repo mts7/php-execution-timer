@@ -124,7 +124,7 @@ jobs:
           name: Mutation Tests
           command: |
             mv ~/reports/junit.xml reports/coverage-xml/junit.xml
-            php -d memory_limit=-1 vendor/bin/infection --threads=4 --min-msi=100 --min-covered-msi=100 --coverage=reports/coverage-xml
+            php -d memory_limit=-1 vendor/bin/infection --threads=4 --min-msi=100 --min-covered-msi=100 --coverage=reports/coverage-xml --skip-initial-tests
       - store_artifacts:
           path: reports/infection.html
           destination: infection.html

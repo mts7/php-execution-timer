@@ -7,38 +7,34 @@ namespace MtsTimer;
 /**
  * Use a timer with fixed values for testing classes implementing TimerInterface.
  */
-class FixedTimer implements TimerInterface
+class FixedTimer extends AbstractTimer
 {
-    private float $duration = 0.0;
+    public const DURATION = 1.7;
 
-    public function setDuration(float $duration): void
-    {
-        $this->duration = $duration;
-    }
-
-    public function reset(): void
-    {
-        // there is no need to reset since the values are pre-configured
-    }
-
+    /**
+     * Sets the start value to an arbitrary value to avoid getting the time.
+     */
     public function start(): void
     {
-        // the start value should be set by configure() method
+        // this allows multiple fixed calls to work
+        $this->timeStop = 0;
+
+        $this->setStart(1.0);
     }
 
-    public function stop(): void
+    /**
+     * Gets the sum of the start time and the fixed duration.
+     *
+     * The final calculation for stop will be start + duration - start, so the
+     * fixed duration set in setDuration() will be the result.
+     *
+     * @see start()
+     * @see stop()
+     *
+     * @noinspection PhpMissingParentCallCommonInspection
+     */
+    protected function getNow(): float
     {
-        // the end value should be set by configure() method
-    }
-
-    public function getDuration(): float
-    {
-        // this is unused
-        return 0.0;
-    }
-
-    public function getTotalDuration(): float
-    {
-        return $this->duration;
+        return $this->timeStart + self::DURATION;
     }
 }

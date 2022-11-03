@@ -20,17 +20,30 @@ interface TimerInterface
     public function start(): void;
 
     /**
-     * Ends the timer.
+     * Stops the timer.
+     *
+     * @throws \MtsTimer\Exception\IncompleteTimingException
      */
     public function stop(): void;
 
     /**
      * Gets the duration of the last timer.
+     *
+     * @throws \MtsTimer\Exception\IncompleteTimingException
      */
     public function getDuration(): float;
 
     /**
      * Gets the total duration from all timers.
+     *
+     * @throws \MtsTimer\Exception\IncompleteTimingException
      */
     public function getTotalDuration(): float;
+
+    /**
+     * Adds the last duration to the existing duration value for a running total
+     *
+     * @throws \MtsTimer\Exception\IncompleteTimingException
+     */
+    public function addDuration(): void;
 }
