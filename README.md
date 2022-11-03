@@ -62,17 +62,20 @@ for ($i = 0; $i < 3; $i++) {
 ## Testing with FixedTimer
 
 The usual timer in the code is `Timer` while the tests would use `FixedTimer`
-without changing the code. This is a benefit of using composition.
+without changing the code. Having `TimerInterface` is a benefit of using
+composition. Since both `Timer` and `FixedTimer` have similar functionality, the
+base functionalities are contained in `AbstractTimer` with overriding methods as
+necessary.
 
-A basic version of `FixedTimer` exists and has a `setDuration` method that
-allows for setting the duration (since no other properties need to exist). 
+`FixedTimer` uses two constant (fixed) values (instead of the time): One for
+start, and another for stop.
 
 ### Examples
 
 These are very simple examples of having a class that uses the timer as well as
 a class that uses the class and a class that tests the class. In real-world
 scenarios, use a [container](https://github.com/mts7/php-dependency-injection)
-for dependency injection.
+for dependency injection and a callable that takes time.
 
 ```php
 class Benchmark
@@ -109,14 +112,12 @@ class BenchmarkTest
 {
     public function testRun(): void
     {
-        $duration = 1;
         $timer = new \MtsTimer\FixedTimer();
-        $timer->configure($duration);
         $benchmark = new Benchmark($timer);
+
+        $duration = $benchmark->run([RunTheBenchmark::class, 'doNothing']);
         
-        $time = $timer->getDuration();
-        
-        $this->assertSame($duration, $time);
+        $this->assertSame($timer::DURATION, $duration);
     }
 }
 ```

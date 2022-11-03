@@ -5,14 +5,17 @@ declare(strict_types=1);
 namespace MtsTimer\Tests\Unit;
 
 use MtsTimer\FixedTimer;
+use MtsTimer\Tests\TimerTestTrait;
 use PHPUnit\Framework\TestCase;
 
 /**
+ * This tests all of the base functionality using FixedTimer.
+ *
  * @group timer
  */
 final class FixedTimerTest extends TestCase
 {
-    private FixedTimer $fixture;
+    use TimerTestTrait;
 
     protected function setUp(): void
     {
@@ -21,27 +24,17 @@ final class FixedTimerTest extends TestCase
         $this->fixture = new FixedTimer();
     }
 
-    public function testSetDuration(): void
+    /**
+     * @throws \MtsTimer\Exception\IncompleteTimingException
+     */
+    public function testGetDurationFixed(): void
     {
-        $duration = 1.7;
+        $this->initializeTimer();
 
-        $this->fixture->setDuration($duration);
+        $duration = $this->fixture->getDuration();
         $total = $this->fixture->getTotalDuration();
 
-        $this->assertSame($duration, $total);
-    }
-
-    public function testSetDurationEmpty(): void
-    {
-        $duration = $this->fixture->getTotalDuration();
-
-        $this->assertSame(0.0, $duration);
-    }
-
-    public function testGetDuration(): void
-    {
-        $duration = $this->fixture->getDuration();
-
-        $this->assertSame(0.0, $duration);
+        $this->assertSame(FixedTimer::DURATION, round($duration, 1));
+        $this->assertSame(FixedTimer::DURATION, round($total, 1));
     }
 }
