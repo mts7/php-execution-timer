@@ -96,6 +96,17 @@ trait TimerTestTrait
     /**
      * @throws \MtsTimer\Exception\IncompleteTimingException
      */
+    public function testStop(): void
+    {
+        $this->expectException(IncompleteTimingException::class);
+        $this->expectErrorMessage('Call $timer->start() prior to calling $timer->stop().');
+
+        $this->fixture->stop();
+    }
+
+    /**
+     * @throws \MtsTimer\Exception\IncompleteTimingException
+     */
     public function testStopDouble(): void
     {
         $this->initializeTimer();
