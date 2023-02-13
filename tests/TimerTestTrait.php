@@ -34,7 +34,7 @@ trait TimerTestTrait
 
         $this->assertGreaterThan(0.0, $duration);
         $this->expectException(IncompleteTimingException::class);
-        $this->expectErrorMessage('Call $timer->start() before computing duration.');
+        $this->expectExceptionMessage('Call $timer->start() before computing duration.');
 
         $this->fixture->getDuration();
     }
@@ -51,7 +51,7 @@ trait TimerTestTrait
 
         $this->assertGreaterThan(0.0, $duration);
         $this->expectException(IncompleteTimingException::class);
-        $this->expectErrorMessage(
+        $this->expectExceptionMessage(
             'Call $timer->addDuration() after stopping the timer before getting the total duration.'
         );
 
@@ -70,7 +70,7 @@ trait TimerTestTrait
 
         $this->assertGreaterThan(0.0, $duration);
         $this->expectException(IncompleteTimingException::class);
-        $this->expectErrorMessage('Call $timer->start() prior to calling $timer->stop().');
+        $this->expectExceptionMessage('Call $timer->start() prior to calling $timer->stop().');
 
         $this->fixture->stop();
     }
@@ -88,7 +88,7 @@ trait TimerTestTrait
 
         $this->assertGreaterThan(0.0, $duration);
         $this->expectException(IncompleteTimingException::class);
-        $this->expectErrorMessage('Call $timer->stop() before computing duration.');
+        $this->expectExceptionMessage('Call $timer->stop() before computing duration.');
 
         $this->fixture->getDuration();
     }
@@ -99,7 +99,7 @@ trait TimerTestTrait
     public function testStop(): void
     {
         $this->expectException(IncompleteTimingException::class);
-        $this->expectErrorMessage('Call $timer->start() prior to calling $timer->stop().');
+        $this->expectExceptionMessage('Call $timer->start() prior to calling $timer->stop().');
 
         $this->fixture->stop();
     }
@@ -112,7 +112,7 @@ trait TimerTestTrait
         $this->initializeTimer();
 
         $this->expectException(IncompleteTimingException::class);
-        $this->expectErrorMessage('Call $timer->reset() or $timer->start() before calling $timer->stop() again.');
+        $this->expectExceptionMessage('Call $timer->reset() or $timer->start() before calling $timer->stop() again.');
 
         $this->fixture->stop();
     }
@@ -136,7 +136,7 @@ trait TimerTestTrait
     public function testGetTotalDuration(): void
     {
         $this->expectException(IncompleteTimingException::class);
-        $this->expectErrorMessage(
+        $this->expectExceptionMessage(
             'Call $timer->addDuration() after stopping the timer before getting the total duration.'
         );
 
